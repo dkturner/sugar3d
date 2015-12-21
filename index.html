@@ -1,0 +1,53 @@
+<html ng-app="Sugar">
+<head>
+    <title>Oh Sugar!</title>
+    <link rel="stylesheet" href="lib/css/bootstrap.min.css">
+      <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.min.js"></script>
+        <script src="lib/js/respond.min.js"></script>
+      <!--[endif]-->
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/dock.css">
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+    <div id="app" ng-controller="RootController">
+        <ul class="menubar nav navbar-nav">
+            <li class="dropdown" ng-repeat="menu in menubar">
+                <a href class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                   aria-expanded="false" ng-bind="menu.label"></a>
+                <ul class="dropdown-menu">
+                    <li ng-repeat="item in menu.items" ng-switch="item.type">
+                        <label ng-switch-when="checkbox"><input type="checkbox" ng-model="item.getterSetter"
+                               ng-model-options="{getterSetter: true}"><span ng-bind="item.label"></span></label>
+                        <a ng-switch-when="command" href ng-click="item.handler()" ng-bind="item.label"></a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <div id="main-dock" dock-area>
+            <div id="scene-graph" dock-panel title="Scene" dock="left">
+                <scene-graph node="rootNode" hide-name="true"></scene-graph>
+            </div>
+            <div id="canvas" dock-panel title="Preview" dock="fill">
+                <sugar-canvas name="default"></sugar-canvas>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="lib/js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="lib/js/d3.min.js"></script>
+    <script type="text/javascript" src="lib/js/angular.min.js"></script>
+    <script type="text/javascript" src="lib/js/angular-route.min.js"></script>
+    <script type="text/javascript" src="lib/js/angular-sanitize.min.js"></script>
+    <script type="text/javascript" src="lib/js/ui-bootstrap-tpls.min.js"></script>
+
+    <script type="text/javascript" src="lib/js/renderjs-0.1.js"></script>
+
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/daddy.js"></script>
+    <script type="text/javascript" src="js/canvas.js"></script>
+    <script type="text/javascript" src="js/dock.js"></script>
+</body>
+</html>

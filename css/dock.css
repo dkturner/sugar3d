@@ -1,0 +1,99 @@
+.dock-area {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #eee;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.dock-panel {
+    position: absolute;
+    display: inline-block;
+    width: auto;
+    height: auto;
+    -webkit-user-drag: element;
+    -moz-user-select: element;
+    user-drag: element; 
+}
+
+.dock-content {
+    position: absolute;
+    top: 23px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #888;
+}
+
+.dock-title {
+    margin: 0;
+    font-size: 16px;
+    font-weight: normal;
+    padding: 3px 10px;
+    background: #888;
+    color: white;
+    border-radius: 10px 10px 0 0;
+    cursor: default;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    -moz-user-select: none;
+    user-drag: none; 
+}
+
+.dock-handle {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.05);
+    transition: background 0.25s ease;
+    display: none;
+}
+
+.dock-handle.dragging {
+    background: rgba(0, 0, 0, 0.85);
+}
+
+.dock-handle-left, .dock-handle-right {
+    top: 23px;
+    width: 3px;
+    bottom: 0;
+    cursor: ew-resize;
+}
+
+.dock-handle-left { left: 0; }
+.dock-handle-right { right: 0; }
+
+.dock-handle-top, .dock-handle-bottom {
+    height: 3px;
+    left: 0;
+    right: 0;
+    cursor: ns-resize;
+}
+
+.dock-handle-top { top: 0; }
+.dock-handle-bottom { bottom: 0; }
+
+.dock-panel[dock="top"] .dock-handle-bottom { display: block; }
+.dock-panel[dock="left"] .dock-handle-right { display: block; }
+.dock-panel[dock="right"] .dock-handle-left { display: block; }
+.dock-panel[dock="bottom"] .dock-handle-top { display: block; }
+
+.dock-drop-hint {
+    position: absolute;
+    background: rgba(0,0,255,0.5);
+    pointer-events: none;
+}
+
+.dock-area.drop-target * {
+    pointer-events: none;
+}
+
+.dock-content {
+    padding: 5px;
+}

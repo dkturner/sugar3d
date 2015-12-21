@@ -1,0 +1,126 @@
+@charset "utf-8";
+
+html, h1, h2, h3, h4, h5, h6 {
+    font-family: "Segoe UI", sans-serif;
+}
+
+body {
+    overflow: hidden;
+}
+
+.menubar {
+    position: absolute;
+    top: 0;
+    left: -10px;
+    right: -10px;
+    height: 30px;
+    background: #444;
+    z-index: 1;
+    box-shadow: 0 0 10px black;
+    padding: 2px 15px;
+}
+
+.menubar + div {
+    position: absolute;
+    top: 30px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.menubar.navbar-nav > li > a {
+    padding: 4px 10px;
+    color: #eee;
+}
+
+.menubar.navbar-nav > li > a:hover {
+    background: #777;
+}
+
+.menubar .dropdown-menu {
+    border: none;
+    border-radius: 0;
+    background: #f8f8f8;
+}
+
+.dropdown-menu > li > label {
+    font-weight: normal;
+    padding: 3px 20px;
+    margin: 0;
+    cursor: pointer;
+    display: block;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    -moz-user-select: none;
+    user-drag: none; 
+}
+
+.dropdown-menu > li > label > input[type="checkbox"] {
+    opacity: 0;
+    cursor: pointer;
+    margin-left: -14px;
+    width: 14px;
+    position: absolute;
+    z-index: 2000;
+}
+
+.dropdown-menu > li > label > input[type="checkbox"]:checked + span:before {
+    content: '✓';
+    font-weight: bold;
+    position: relative;
+    display: block;
+    float: left;
+    margin-left: -15px;
+    width: 14px;
+    height: 20px;
+}
+
+.dropdown-menu > li > a:focus,
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > label:hover {
+    background-color: #eee;
+}
+
+.menubar.navbar-nav > li > a:focus, .menubar.nav .open > a,
+.menubar.nav .open > a:focus, .menubar.nav .open > a:hover {
+    background: #f8f8f8;
+    color: black;
+}
+
+.menubar .navbar-nav > .active > a, 
+.menubar .navbar-nav > .active > a:hover, 
+.menubar .navbar-nav > .active > a:focus {
+    color: #555;
+    background-color: #E7E7E7;
+}
+.menubar .navbar-nav > .open > a, 
+.menubar .navbar-nav > .open > a:hover, 
+.menubar .navbar-nav > .open > a:focus {
+    color: #555;
+    background-color: #D5D5D5;
+}
+/* mobile version */
+.menubar .navbar-toggle {
+    border-color: #DDD;
+}
+.menubar .navbar-toggle:hover,
+.menubar .navbar-toggle:focus {
+    background-color: #DDD;
+}
+.menubar .navbar-toggle .icon-bar {
+    background-color: #CCC;
+}
+@media (max-width: 767px) {
+    .menubar .navbar-nav .open .dropdown-menu > li > a {
+        color: #777;
+    }
+    .menubar .navbar-nav .open .dropdown-menu > li > a:hover,
+    .menubar .navbar-nav .open .dropdown-menu > li > a:focus {
+        color: #333;
+    }
+}

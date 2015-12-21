@@ -1,0 +1,53 @@
+application: sugar3d-1166
+module: default
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+ - url: /admin/.*
+   script: shell.application
+   secure: always
+   login: admin
+ - url: /api/.*
+   script: api.bottle
+   secure: always
+ - url: /tasks/.*
+   script: api.bottle
+   login: admin
+ - url: /auth/.*
+   script: auth.app
+   secure: always
+ - url: /help
+   static_dir: help
+ - url: /controls
+   static_dir: controls
+ - url: /css
+   static_dir: css
+ - url: /js
+   static_dir: js
+ - url: /images
+   static_dir: images
+ - url: /shaders
+   static_dir: shaders
+ - url: /lib
+   static_dir: lib
+ - url: /favicon\.ico
+   static_files: favicon.ico
+   upload: favicon\.ico
+ - url: /.*
+   static_files: index.html
+   upload: index\.html
+
+libraries:
+ - name: MySQLdb
+   version: latest
+ - name: django
+   version: latest
+ - name: markupsafe
+   version: latest
+ - name: pycrypto
+   version: latest
+ - name: PIL
+   version: latest

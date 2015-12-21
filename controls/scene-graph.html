@@ -1,0 +1,32 @@
+<div class="scene-node" ng-class="{selected: selection.nodeId == node.id && !selection.item}">
+<div class="node-id" ng-bind="node.id" ng-click="toggleExpanded()" ng-if="!hideName"></div>
+<ul class="scene-node-content" ng-if="!collapsed">
+    <li ng-if="node.lights" class="scene-node-lights" ng-click="select(node.id, 'lights')"
+        ng-class="{selected: selection.nodeId == node.id && selection.item == 'lights'}">
+        <div class="content-title">Lights</div>
+    </li>
+    <li ng-if="node.camera" class="scene-node-camera" ng-click="select(node.id, 'camera')"
+        ng-class="{selected: selection.nodeId == node.id && selection.item == 'camera'}">
+        <div class="content-title" ng-bind="node.camera.id || 'Camera'"></div>
+    </li>
+    <li ng-if="node.transform" class="scene-node-transform" ng-click="select(node.id, 'transform')"
+        ng-class="{selected: selection.nodeId == node.id && selection.item == 'transform'}">
+        <div class="content-title">Transform</div>
+    </li>
+    <li ng-if="node.shader" class="scene-node-shader" ng-click="select(node.id, 'shader')"
+        ng-class="{selected: selection.nodeId == node.id && selection.item == 'shader'}">
+        <div class="content-title" ng-bind="node.shader.id || 'Shader'"></div>
+    </li>
+    <li ng-if="node.material" class="scene-node-material" ng-click="select(node.id, 'material')"
+        ng-class="{selected: selection.nodeId == node.id && selection.item == 'material'}">
+        <div class="content-title" ng-bind="node.material.id || 'Material'"></div>
+    </li>
+    <li ng-if="node.mesh" class="scene-node-mesh" ng-click="select(node.id, 'mesh')"
+        ng-class="{selected: selection.nodeId == node.id && selection.item == 'mesh'}">
+        <div class="content-title" ng-bind="node.mesh.id || 'Mesh'">Mesh</div>
+    </li>
+    <li ng-repeat="child in node.children" class="scene-node-child">
+        <scene-graph node="child"></scene-graph>
+    </li>
+</ul>
+</div>

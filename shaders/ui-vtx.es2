@@ -1,0 +1,16 @@
+precision highp float;
+
+attribute vec3 aVertexPosition;
+attribute vec3 aVertexNormal;
+attribute vec2 aTextureCoord;
+attribute vec3 aUVector;
+attribute vec3 aVVector;
+
+uniform mat4 uViewportMatrixInverse;
+
+varying highp vec4 vRay;
+
+void main(void) {
+    vRay = uViewportMatrixInverse * vec4(aVertexPosition.xy, -1.0, 1.0);
+    gl_Position = vec4(aVertexPosition, 1.0);
+}

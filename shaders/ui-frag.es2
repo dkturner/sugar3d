@@ -1,0 +1,94 @@
+#extension GL_EXT_frag_depth : enable
+precision highp float;
+const int MAX_LIGHTS = 20;
+
+uniform vec2 uViewportSize;
+uniform int uNumberOfLights;
+uniform vec3 uLightPositions[MAX_LIGHTS];
+uniform vec3 uLightColors[MAX_LIGHTS];
+uniform mat4 uCameraMatrix;
+uniform mat4 uViewportMatrix;
+uniform sampler2D groundTexture;
+
+uniform bool uShowGround;
+uniform bool uShowAxes;
+
+varying highp vec4 vRay;
+
+vec3 wnorm(vec4 x) {
+    return x.xyz / x.w;
+}
+
+void main(void) {
+    vec3 ray = normalize(vRay.xyz * vRay.w);
+    vec3 origin = wnorm(uCameraMatrix * vec4(0.0, 0.0, 0.0, 1.0));
+    vec3 xAxis = normalize(wnorm(uCameraMatrix * vec4(1.0, 0.0, 0.0, 1.0)) - origin);
+    vec3 yAxis = normalize(wnorm(uCameraMatrix * vec4(0.0, 1.0, 0.0, 1.0)) - origin);
+    vec3 zAxis = normalize(wnorm(uCameraMatrix * vec4(0.0, 0.0, 1.0, 1.0)) - origin);
+    vec4 uiPos;
+    float z = 1.0;
+
+    float s = dot(origin, yAxis) / dot(ray, yAxis);
+    float projectedZ = ray.z * s;
+    float groundX = dot(s * ray - origin, xAxis);
+    float groundZ = dot(s * ray - origin, zAxis);
+    uiPos = uViewportMatrix * vec4(s * ray, 1.0);
+    float mx = fract(groundX + 0.5);
+    float mz = fract(groundZ + 0.5);
+    float alpha = (1.0 - exp(1.0 + 20.0 / projectedZ)) * 2.0 *
+                  (exp(-(mx-0.5)*(mx-0.5)*1200.0) + exp(-(mz-0.5)*(mz-0.5)*1200.0));
+    if (uShowGround) {
+        z = uiPos.z / uiPos.w;
+        gl_FragColor = vec4(0.7, 0.7, 0.7, alpha);
+    }
+
+
+/*    // find the orthogonals to the x axis
+    vec3 A = ray - xAxis * dot(ray, xAxis);
+    vec3 B = origin - xAxis * dot(origin, xAxis);
+    // now |sA - B| = k is the x-axis cylinder
+    float a = dot(A, A);
+    float b = -2.0*dot(A, B);
+    float c = dot(B, B);
+    float rad = b*b - 4.0*a*c;
+    if (b > 0.0) {
+        gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+    } else {
+        discard;
+    }*/
+
+/*    if (uShowGround != 0) {
+        float s = dot(origin, yAxis);
+        float t = dot(ray, yAxis);
+        if (s == 0.0) {
+            if (t == 0.0) {
+                gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
+                z = -1.0;
+            }
+        } else {
+            s = s / t;
+            if (s >= 0.0) {
+                float pz = ray.z * s;
+                float eps = 1.0 / (pz*pz);
+                float mx = fract(dot(s * ray - origin, xAxis) + 0.5);
+                float mz = fract(dot(s * ray - origin, zAxis) + 0.5);
+                float alpha = (1.0 - exp(1.0 + 20.0 / pz)) * 2.0 * (exp(-(mx-0.5)*(mx-0.5)*1200.0) + exp(-(mz-0.5)*(mz-0.5)*1200.0));
+                if (alpha > 0.1) {
+                    gl_FragColor = vec4(0.7, 0.7, 0.7, alpha);
+                    uiPos = uViewportMatrix * vec4(s * ray, 1.0);
+                    z = uiPos.z / uiPos.w;
+                }
+            }
+        }
+    }*/
+
+    if (z >= 1.0 || gl_FragColor.a < 0.1)
+        discard;
+
+#ifdef GL_EXT_frag_depth
+    // convert from clip-space to depth-space
+    float far = gl_DepthRange.far;
+    float near = gl_DepthRange.near;
+    gl_FragDepthEXT = (((far - near) * z) + near + far) / 2.0;
+#endif
+}

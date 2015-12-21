@@ -1,0 +1,82 @@
+#canvas > .dock-content {
+    padding: 0;
+}
+
+.sugar-canvas {
+    width: 100%;
+    height: 100%;
+    background: black;
+}
+
+#scene-graph {
+    min-width: 100px;
+    width: 400px;
+}
+
+#scene-graph > .dock-content {
+    overflow: auto;
+}
+
+.scene-node-content {
+    list-style-type: none;
+    padding: 0;
+    overflow: hidden;
+}
+
+.scene-node-content .scene-node-content {
+    padding-left: 20px;
+}
+
+.content-title, .node-id {
+    padding-left: 24px;
+    background-repeat: no-repeat;
+    background-size: 18px 18px;
+    cursor: pointer;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    -moz-user-select: none;
+    user-drag: none; 
+}
+
+.selected > .content-title, .selected > .node-id {
+    background-color: #777;
+    color: black;
+    -webkit-filter: invert(100%);
+    -moz-filter: invert(100%);
+    filter: invert(100%);
+    border-radius: 5px;
+    /*outline: 2px solid #777;*/
+    box-shadow: 0 0 3px white;
+
+    position: relative;
+    left: -3px;
+    right: -3px;
+    padding-left: 26px;
+    background-position: 3px 0;
+    /* TODO: an IE equivalent for this */
+}
+
+.node-id {
+    background-image: url(../images/icon-node.png);
+}
+
+.scene-node-camera > .content-title {
+    background-image: url(../images/icon-camera.png);
+}
+
+.scene-node-mesh > .content-title {
+    background-image: url(../images/icon-mesh.png);
+}
+
+.scene-node-lights > .content-title {
+    background-image: url(../images/icon-lights.png);
+}
+
+.scene-node-transform > .content-title {
+    background-image: url(../images/icon-transform.png);
+}
