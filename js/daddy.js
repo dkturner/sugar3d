@@ -31,26 +31,30 @@ function () {
     function createDefaultScene() {
         return {
             id: 'Scene',
-            camera: {
+            cameras: [{
                 id: 'defaultCamera',
                 transform: [
                     ['rotate', 15, 1, 0, 0],
                     ['translate', 0, 0, 10]
                 ]
-            },
-            lights: [ {
+            }],
+            lights: [{
+                id: 'point light 1',
                 type: 'point',
                 position: [0, -200, 1000],
                 color: [0.8, 0.8, 0.8],
             }, {
+                id: 'point light 2',
                 type: 'point',
                 position: [-600, 600, -400],
                 color: [0.8, 0.8, 0.8],
             }, {
+                id: 'point light 3',
                 type: 'point',
                 position: [600, 600, -400],
                 color: [0.8, 0.8, 0.8],
             }, {
+                id: 'ambient light',
                 type: 'ambient',
                 color: [0.2, 0.2, 0.2],
             }],
@@ -97,6 +101,7 @@ function () {
     var views = {};
     var scene = createDefaultScene();
     var ui = createDefaultUi();
+    var resources = new renderjs.Resources();
     var selection = {
         nodeId: 'cube1',
     };
@@ -133,6 +138,7 @@ function () {
     } ];
     return {
         scene: scene,
+        resources: resources,
         selection: selection,
         registerCanvas: registerCanvas, // (canvas, name, renderer)
         unregisterCanvas: unregisterCanvas, // (canvas)

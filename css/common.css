@@ -8,6 +8,8 @@ body {
     overflow: hidden;
 }
 
+/* Apply a shiv to bootstrap until it learns obedience */
+
 .menubar {
     position: absolute;
     top: 0;
@@ -89,7 +91,7 @@ body {
 .menubar.navbar-nav > li > a:focus, .menubar.nav .open > a,
 .menubar.nav .open > a:focus, .menubar.nav .open > a:hover {
     background: #f8f8f8;
-    color: black;
+    color: #555;
 }
 
 .menubar .navbar-nav > .active > a, 
@@ -104,7 +106,6 @@ body {
     color: #555;
     background-color: #D5D5D5;
 }
-/* mobile version */
 .menubar .navbar-toggle {
     border-color: #DDD;
 }
@@ -123,4 +124,134 @@ body {
     .menubar .navbar-nav .open .dropdown-menu > li > a:focus {
         color: #333;
     }
+}
+
+.dropdown-menu.context-menu {
+    display: block;
+    border-radius: 0;
+    background: #f8f8f8;
+}
+
+.dropdown-submenu {
+    position:relative;
+}
+
+.dropdown-submenu > .dropdown-menu > li:first-child:before,
+.dropdown-submenu > .dropdown-menu > li.first-child:before {
+    content: '';
+    position: absolute;
+    left: -10px;
+    width: 10px;
+    top: 0;
+    height: 36px;
+    background: #f8f8f8;
+    z-index: -1;
+}
+
+.dropdown-submenu>.dropdown-menu {
+    top:0;
+    left:100%;
+    margin-top:-6px;
+    margin-left:-1px;
+    border-radius:0;
+    z-index: -2;
+    background: #f8f8f8;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+    display:block;
+}
+.dropdown-submenu>a:after {
+    display:block;
+    content:" ";
+    float:right;
+    width:0;
+    height:0;
+    border-color:transparent;
+    border-style:solid;
+    border-width:5px 0 5px 5px;
+    border-left-color:#888;
+    margin-top:5px;
+    margin-right:-10px;
+}
+.dropdown-submenu:hover>a:after {
+    border-left-color:#888;
+}
+.dropdown-submenu.pull-left {
+    float:none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+    left:-100%;
+    margin-left:10px;
+    -webkit-border-radius:6px 0 6px 6px;
+    -moz-border-radius:6px 0 6px 6px;
+    border-radius:6px 0 6px 6px;
+}
+
+.nav-tabs {
+    border-bottom: 1px solid #888;
+}
+
+.nav-tabs > li > a {
+    padding: 3px 10px;
+    background: #444;
+    border-radius: 0;
+    color: #eee;
+    margin: 0;
+    border-right: 1px solid black;
+    border-top: 1px solid black;
+}
+
+.nav-tabs > li > a {
+    padding: 3px 10px;
+    background: #444;
+    border-radius: 0;
+    color: #aaa;
+    margin: 0;
+    border-right: 1px solid black;
+    border-top: 1px solid black;
+}
+
+.nav-tabs > li > a:hover,
+.nav-tabs > li > a:focus {
+    background: #777;
+    border-color: black;
+    border-left: 1px solid transparent;
+    color: #ccc;
+}
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus {
+    background: #777;
+    border-color: #444;
+    color: white;
+}
+
+section {
+    border: 1px solid #888;
+    height: calc(100% - 5px);
+    margin-top: 5px;
+}
+
+section > h3:first-child {
+    position: relative;
+    top: -10px;
+    margin-top: 0;
+    font-size: 16px;
+    padding: 0px 10px;
+    z-index: 1;
+    width: auto;
+    display: inline-block;
+}
+
+section > h3:first-child:before {
+    position: absolute;
+    display: block;
+    background: white;
+    content: '';
+    top: 0;
+    left: 3px;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
 }

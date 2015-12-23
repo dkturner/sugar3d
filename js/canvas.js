@@ -162,7 +162,7 @@ function ($window, $timeout, $daddy) {
             cameraMatrix.translate(0, 0, 10);
             $timeout(function () {
                 setCanvasSize();
-                renderjs.createRenderer(canvas).then(function (r) {
+                renderjs.createRenderer(canvas, $daddy.resources).then(function (r) {
                     renderer = r;
                     $daddy.registerCanvas(canvas, scope.name, renderer);
                     renderer.time = $daddy.currentTime;

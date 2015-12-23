@@ -304,9 +304,11 @@ function ($scope, $element, $document) {
         return myUniqueId + '(' + panel.data('__dock_id') + ')';
     }
     this.getPanelById = function (id) {
-        for (var i = 0; i < panels.length; ++ i)
-            if (panels[i].data('__dock_id') == +id)
-                return panels[i];
+        for (var i = 0; i < panels.length; ++ i) {
+            var panel = angular.element(panels[i]);
+            if (panel.data('__dock_id') == +id)
+                return panel;
+        }
         return null;
     }
     this.findDragPanel = function (id) {
@@ -317,7 +319,7 @@ function ($scope, $element, $document) {
             if (dockId[0] != '#' && +dockId != myUniqueId)
                 return null;
             var dock = angular.element(dockId);
-            return dock.scope().getPanelById(+panelId);
+            return dock.controller('dockArea').getPanelById(+panelId);
         } else {
             return angular.element(id);
         }

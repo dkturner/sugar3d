@@ -4,14 +4,14 @@ angular.module('Sugar', [
     'ui.bootstrap',
 ])
 
-.controller('RootController', ['$scope', 'SugarDaddy',
-function ($scope, $daddy) {
+.controller('RootController', ['$scope', '$compile', 'SugarDaddy',
+function ($scope, $compile, $daddy) {
     $scope.rootNode = $daddy.scene;
     $scope.menubar = $daddy.menu;
 }])
 
-.controller('SceneGraphCtrl', ['$scope', 'SugarDaddy',
-function ($scope, $daddy) {
+.controller('SceneGraphCtrl', ['$scope', '$compile', 'SugarDaddy', 'SugarMommy',
+function ($scope, $compile, $daddy, $mommy) {
     $scope.selection = $daddy.selection;
     $scope.select = function (nodeId, item) {
         $daddy.select(nodeId, item);
@@ -25,6 +25,27 @@ function ($scope, $daddy) {
         } else {
             $scope.select($scope.node.id);
         }
+    }
+    $scope.showContextMenu = function (event, node, item) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+    $scope.addShader = function (node) {
+        node.shader = {
+            /*vertex: 'text/plain,precision highp float;\n\nattribute vec3 aVertexPosition;\n'
+                  + 'attribute vec3 aVertexNormal;\nattribute vec2 aTextureCoord;\nattribute vec3 aUVector;\n'
+                  + 'attribute vec3 aVVector;\n\nuniform mat4 uModelMatrix;\nuniform mat4 uCameraMatrix;\n'
+                  + 'uniform mat4 uViewportMatrix;\nuniform mat4 uViewportMatrixInverse;\n\n'
+                  + 'varying highp vec2 vTextureCoord;\n\n'
+                  + 'void main(void) {\n    gl_Position = uViewPortMatrix * uCameraMatrix * uModelMatrix * '
+                  + 'vec4(aVertexPosition, 1.0);\n    vTextureCoord = aTextureCoord;\n}\n',
+            fragment: 'text/plain,precision highp float;\n\n*/
+            vertex: 'std-vertex.es2',
+            fragment: 'std-fragment.es2',
+        };
+        $mommy.showDockWindow($scope, 'Shader', 'bottom',
+            '<div glsl-editor node="node">', { node: node });
+        $daddy.select(node.id, 'shader');
     }
 }])
 

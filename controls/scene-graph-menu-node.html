@@ -1,0 +1,17 @@
+<ul class="dropdown-menu context-menu">
+    <li class="dropdown-submenu">
+        <a tabindex="-1" href class="dropdown-toggle" data-toggle="dropdown">Add</a>
+        <ul class="dropdown-menu">
+            <li><a href>Light</a></li>
+            <li><a href>Camera</a></li>
+            <li><a href>Transform</a></li>
+            <li ng-if="!node.shader"><a href ng-click="addShader(node); dismiss()">Shader</a></li>
+            <li><a href>Material</a></li>
+            <li class="divider"></li>
+            <li><a href>Sub-object</a></li>
+            <li><a href>Sphere</a></li>
+            <li><a href>Cube</a></li>
+            <li><a href>Disc</a></li>
+        </ul>
+    </li>
+</ul>

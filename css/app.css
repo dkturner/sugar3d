@@ -17,6 +17,11 @@
     overflow: auto;
 }
 
+#scene-graph > .dock-content > scene-graph > .scene-node {
+    /* this is needed to provide space to for the root context menu */
+    min-height: calc(100% - 10px);
+}
+
 .scene-node-content {
     list-style-type: none;
     padding: 0;
@@ -73,10 +78,31 @@
     background-image: url(../images/icon-mesh.png);
 }
 
-.scene-node-lights > .content-title {
-    background-image: url(../images/icon-lights.png);
+.scene-node-light > .content-title {
+    background-image: url(../images/icon-light.png);
 }
 
 .scene-node-transform > .content-title {
     background-image: url(../images/icon-transform.png);
+}
+
+.scene-node-shader > .content-title {
+    background-image: url(../images/icon-shader.png);
+}
+
+.glsl-editor {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.glsl-editor > [tabset] {
+    height: 100%;
+    background: #888;
+}
+
+.glsl-source {
+    height: calc(100% - 28px);
 }
